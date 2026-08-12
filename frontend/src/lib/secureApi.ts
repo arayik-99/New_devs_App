@@ -1452,6 +1452,11 @@ export class SecureAPIClient {
   /**
    * Get dashboard summary with optional simulation header
    */
+  async getDashboardProperties() {
+    const res = await this.request<any>('/api/v1/dashboard/properties');
+    return Array.isArray(res?.properties) ? res.properties : [];
+  }
+
   async getDashboardSummary(propertyId: string, options?: { simulatedTenant?: string, timestamp?: number }) {
     const queryParams = new URLSearchParams({ property_id: propertyId });
     if (options?.timestamp) {
